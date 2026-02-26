@@ -1,0 +1,47 @@
+# Bot Emoji Registry
+
+هذا الملف مخصص ليكون **مرجع جاهز** لأي نموذج/خدمة أخرى تحتاج نفس إيموجيات البوت.
+
+- المصدر: قائمة الإيموجيات المرسلة من المستخدم.
+- الاستخدام البرمجي: `src/config/customEmojis.js`.
+- معرف النسخة: `moutazwn-1476278857228222534`.
+
+## Format
+- Discord custom emoji syntax: `<:name:id>`
+
+## Included set (music/control focused)
+- 7670musicbeat — 1476278786101346547
+- 1969spotify — 1476278709001519165
+- 35248spotify — 1476278829130448967
+- 8005spotifyqueueadd — 1476278787653238858
+- 2841spotifyfavourite — 1476278718287708391
+- 6163spotifydownload — 1476278756636229724
+- 1712listeningtomusic — 1476278707436912761
+- 1363_wingedmusicnote — 1476278698033287270
+- 1625excitedmusicnote — 1476278703813296230
+- 2028listentogetherwith — 1476278710507405524
+- 7421_Boombox — 1476278782678794240
+- 5799djpeepo — 1476278742920724663
+- 5964catjam — 1476278750378201260
+- 6850pepejam — 1476278771098321088
+- 6798pusheenpiano — 1476278769286123600
+- 8007birdmusic — 1476278789251268824
+- 8007birdtriangle — 1476278790828199946
+- 6094birdvibetriangle — 1476278751741345873
+- 8853sounddark — 1476278797799133377
+- 8853soundwhite — 1476278799409877157
+- 8750soundmutedark — 1476278795651780732
+- 1070soundmutewhite — 1476278696607482049
+- 5920microphonedark — 1476278747337330791
+- 5920microphonewhite — 1476278748742684744
+- 7386microphonemutedark — 1476278778140557564
+- 7612microphonemutewhite — 1476278784280756386
+- 9256settingsdark — 1476278809580802058
+- 9256settingswhite — 1476278810985894111
+- 2727accountisconnected — 1476278715012088011
+- 4513accountisconnectedwhite — 1476278729289240791
+- 6548accountisnotconnected — 1476278765482020864
+- 1625maintainscommands — 1476278705473982494
+- 5592letsgo — 1476278740232442012
+- 1539cooked — 1476278699363139647
+- 6740skull — 1476278767948267715

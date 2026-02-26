@@ -1,0 +1,18 @@
+{
+  "name": "emoji-media-bot",
+  "version": "1.0.0",
+  "description": "Discord bot with improved UI, emoji-first commands, and YouTube/Spotify based playback",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "check": "node --check src/index.js && node --check src/services/musicPlayer.js && node --check src/services/voicePlayback.js && node --check src/services/appleMusicService.js && node --check src/ui/messages.js"
+  },
+  "dependencies": {
+    "@discordjs/voice": "^0.18.0",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5",
+    "play-dl": "^1.9.7",
+    "spotify-url-info": "^3.2.14"
+  }
+}
