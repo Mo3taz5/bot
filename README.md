@@ -4,7 +4,7 @@
 
 ## Features
 - Multi-platform: `!play` يدعم روابط/بحث YouTube + Spotify + Apple Music.
-- Playback controls: `!play !stop !pause(button) !skip !shuffle !loop`.
+- Playback controls: `!play !stop !pause(button) !skip !shuffle !loop`.                             
 - Interactive joystick: زر `🕹️ Joystick` يفتح قائمة تحكم مرئية بالأزرار.
 - Queue management: عرض القائمة + حذف + نقل + خلط.
 - Volume control: `!volume 1-200`.
