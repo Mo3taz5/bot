@@ -32,6 +32,10 @@ function createPlaybackMessage(track) {
   };
 }
 
+function playbackFailureMessage() {
+  return '❌ تعذر تشغيل هذا الرابط/الاسم. جرّب رابطًا آخر أو أعد المحاولة.';
+}
+
 async function playCurrentTrack(guildId) {
   const nowPlaying = player.getNowPlaying(guildId);
   if (!nowPlaying) {
@@ -49,7 +53,7 @@ async function ensureVoiceConnection(message) {
     throw new Error('لازم تدخل روم صوتي أولاً قبل أمر التشغيل 🎧');
   }
 
-  const session = await voicePlayback.connect(voiceChannel);
+  await voicePlayback.connect(voiceChannel);
   voicePlayback.onIdle(message.guildId, async () => {
     const next = player.skip(message.guildId);
     if (next) {
@@ -59,8 +63,6 @@ async function ensureVoiceConnection(message) {
 
     voicePlayback.stop(message.guildId);
   });
-
-  return session;
 }
 
 client.on('messageCreate', async (message) => {
@@ -87,7 +89,13 @@ client.on('messageCreate', async (message) => {
       const { nowPlaying, shouldAutoStart } = await player.addTrack(guildId, input, message.author.username);
 
       if (shouldAutoStart) {
-        await playCurrentTrack(guildId);
+        try {
+          await playCurrentTrack(guildId);
+        } catch {
+          player.stop(guildId);
+          voicePlayback.stop(guildId);
+          throw new Error(playbackFailureMessage());
+        }
       }
 
       await message.reply(createPlaybackMessage(nowPlaying));
@@ -110,7 +118,14 @@ client.on('messageCreate', async (message) => {
         return;
       }
 
-      await voicePlayback.playTrack(guildId, next.url);
+      try {
+        await voicePlayback.playTrack(guildId, next.url);
+      } catch {
+        player.stop(guildId);
+        voicePlayback.stop(guildId);
+        throw new Error(playbackFailureMessage());
+      }
+
       await message.reply(createPlaybackMessage(next));
       return;
     }
@@ -153,7 +168,15 @@ client.on('interactionCreate', async (interaction) => {
       return;
     }
 
-    await voicePlayback.playTrack(guildId, next.url);
+    try {
+      await voicePlayback.playTrack(guildId, next.url);
+    } catch {
+      player.stop(guildId);
+      voicePlayback.stop(guildId);
+      await interaction.reply({ embeds: [createErrorPanel(playbackFailureMessage())] });
+      return;
+    }
+
     await interaction.reply(createPlaybackMessage(next));
     return;
   }

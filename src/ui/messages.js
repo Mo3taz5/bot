@@ -31,7 +31,8 @@ export function createNowPlayingPanel(track) {
   )
     .addFields(
       { name: `${EMOJIS.queue} عدد العناصر`, value: `${track.queueLength}`, inline: true },
-      { name: `${EMOJIS.ok} بواسطة`, value: track.requestedBy, inline: true }
+      { name: `${EMOJIS.ok} بواسطة`, value: track.requestedBy, inline: true },
+      { name: '🔗 الرابط', value: track.url, inline: false }
     )
     .setFooter({ text: `${EMOJIS.search} YouTube API + Spotify Resolver` });
 }
