@@ -1,3 +1,5 @@
+import * as play from 'play-dl';
+
 const YT_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 const YT_VIDEO_URL = 'https://www.googleapis.com/youtube/v3/videos';
 
@@ -31,7 +33,26 @@ export class YouTubeService {
     this.fetch = fetchImpl;
   }
 
+  async fallbackSearch(query) {
+    const results = await play.search(query, { limit: 1, source: { youtube: 'video' } });
+    const item = results?.[0];
+    if (!item?.url) {
+      throw new Error('تعذر العثور على نتيجة تشغيل من يوتيوب');
+    }
+
+    return {
+      id: item.id,
+      title: item.title,
+      url: item.url,
+      source: 'YouTube play-dl fallback'
+    };
+  }
+
   async getVideoById(videoId) {
+    if (!this.apiKey) {
+      return this.fallbackSearch(`https://www.youtube.com/watch?v=${videoId}`);
+    }
+
     const url = new URL(YT_VIDEO_URL);
     url.searchParams.set('part', 'snippet');
     url.searchParams.set('id', videoId);
@@ -39,13 +60,13 @@ export class YouTubeService {
 
     const response = await this.fetch(url.toString());
     if (!response.ok) {
-      throw new Error(`YouTube API error: ${response.status}`);
+      return this.fallbackSearch(`https://www.youtube.com/watch?v=${videoId}`);
     }
 
     const data = await response.json();
     const item = data.items?.[0];
     if (!item) {
-      throw new Error('تعذر الوصول للفيديو من رابط يوتيوب الحالي');
+      return this.fallbackSearch(`https://www.youtube.com/watch?v=${videoId}`);
     }
 
     return {
@@ -62,6 +83,10 @@ export class YouTubeService {
       return this.getVideoById(directVideoId);
     }
 
+    if (!this.apiKey) {
+      return this.fallbackSearch(query);
+    }
+
     const url = new URL(YT_SEARCH_URL);
     url.searchParams.set('part', 'snippet');
     url.searchParams.set('q', query);
@@ -71,13 +96,13 @@ export class YouTubeService {
 
     const response = await this.fetch(url.toString());
     if (!response.ok) {
-      throw new Error(`YouTube API error: ${response.status}`);
+      return this.fallbackSearch(query);
     }
 
     const data = await response.json();
     const item = data.items?.[0];
     if (!item) {
-      throw new Error('No results found on YouTube');
+      return this.fallbackSearch(query);
     }
 
     return {

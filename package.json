@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "check": "node --check src/index.js && node --check src/services/musicPlayer.js && node --check src/services/voicePlayback.js && node --check src/ui/messages.js"
+    "check": "node --check src/index.js && node --check src/services/musicPlayer.js && node --check src/services/voicePlayback.js && node --check src/services/appleMusicService.js && node --check src/ui/messages.js"
   },
   "dependencies": {
     "@discordjs/voice": "^0.18.0",

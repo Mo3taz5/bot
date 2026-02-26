@@ -12,7 +12,7 @@ export const env = {
 };
 
 export function validateEnv() {
-  const required = ['discordToken', 'youtubeApiKey'];
+  const required = ['discordToken'];
   const missing = required.filter((key) => !env[key]);
 
   if (missing.length > 0) {
