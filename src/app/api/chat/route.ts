@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// OpenRouter API
-const API_KEY = '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';
-const MODEL = 'openai/gpt-4o-mini';
+// OpenRouter API - GLM 4.5 Air
+const API_KEY = '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';
+const MODEL = 'glm-4/glm-4.5-air:free';
 
 export async function POST(request: NextRequest) {
   try {
@@ -75,7 +75,7 @@ $$= \\frac{x^{2+1}}{2+1} + C = \\frac{x^3}{3} + C$$
       body: JSON.stringify({
         model: MODEL,
         messages: [systemMessage].concat(chatHistory),
-        max_tokens: 1000,
+        max_tokens: 2000,
         temperature: 0.7
       })
     });
@@ -84,7 +84,7 @@ $$= \\frac{x^{2+1}}{2+1} + C = \\frac{x^3}{3} + C$$
       const error = await response.text();
       console.error('OpenRouter error:', error);
       return NextResponse.json({ 
-        error: 'خطأ في الاتصال بالـ API: ' + response.status 
+        error: 'خطأ في الاتصال: ' + error 
       }, { status: 500 });
     }
 
