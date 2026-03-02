@@ -1,3 +1,3 @@
 import type { NextConfig } from "next";
-const nextConfig: NextConfig = { output: "standalone" };
-export default nextConfig;
+const c: NextConfig = { output: "standalone" };
+export default c;
