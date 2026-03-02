@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "موسوعة حساب التفاضل والتكامل",
-  description: "الشرح الأشمل بالعربية — كل مفهوم، كل حالة، كل تقنية، مع أمثلة محلولة خطوة بخطوة",
+  description: "الشرح الأشمل بالعربية — كل مفهوم، كل حالة، كل تقنية، مع أمثلة محلولة",
 };
 
 export default function RootLayout({
